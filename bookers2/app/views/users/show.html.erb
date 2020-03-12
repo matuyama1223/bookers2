@@ -1,0 +1,75 @@
+
+ <div class="container">
+  <div class="row">
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+   <div class="col-xs-3">
+            <h2>User info</h2>
+            <%= attachment_image_tag @user, :profile_image,:fill, 60,60, fallback: "no_image.jpg" %>
+            <table>
+              <tbody>
+                <tr>
+                  <th>name</th>
+                  <td><%=current_user.name%></td>
+                </tr>
+                <tr>
+                  <th>introduction</th>
+                  <td><%=current_user.introduction%></td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <%= link_to "",edit_user_path(@user), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_13250" %>
+
+            <div class="row">
+
+             <h3>New book</h3>
+              <%= form_for(@book) do |f| %>
+
+                <h4>Title</h4>
+                <%= f.text_field :title %>
+
+                <h4>Opinion</h4>
+                <%= f.text_area :body %>
+
+                <%= f.submit 'Create Book' %>
+                <%= notice %>
+            <% end %>
+          </div>
+       </div>
+
+     <div class="col-xs-9">
+       <h3>Books</h3>
+       <table class="table table-hover table-inverse">
+         <thead>
+           <tr>
+             <th colspan ="1"></th>
+             <th>Title</th>
+             <th>Opinon</th>
+           </tr>
+         </thead>
+         <tbody>
+          <% @books.each do |book| %>
+             <td><%= attachment_image_tag book.user, :profile_image,  :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %></td>
+
+             <td><%= link_to book.title, book_path(book.id) %>  </td>
+             <td><%= book.body %></td>
+           </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="container">
+ <div class="row">
+  <div class="col-xs-3 col-xs-offset-9">
+    <p>CopyRight Infratop.inc</p>
+  </div>
+ </div>
+</div>

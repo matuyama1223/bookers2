@@ -1,0 +1,68 @@
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+ <div class="container">
+ <div class="row">
+  <div class="col-xs-3">
+    <h2>User info</h2>
+    <%= attachment_image_tag @book.user, :profile_image,:fill, 60,60, fallback: "no_image.jpg" %>
+
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>name</th>
+                  <td><%=@book.user.name%></td>
+                </tr>
+                <tr>
+                  <th>introduction</th>
+                  <td><%=@book.user.introduction%></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row">
+            <%= link_to "",edit_user_path(@user.id),class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_13250"  %>
+
+            </div>
+     <h3>New book</h3>
+     <%= form_for(@new_book) do |f| %>
+
+      <h4> Title</h4>
+      <%= f.text_field :title %>
+
+      <h4>Opinion</h4>
+      <%= f.text_area :body %>
+
+      <%= f.submit 'Create Book' %>
+      <%= notice%>
+
+  <% end %>
+  </div>
+
+       <div class="col-xs-9">
+     <h2>Book detail</h2>
+     <table class="table">
+       <tbody>
+        <%= link_to user_path(@book.user.id) do %>
+          <%= attachment_image_tag @book.user, :profile_image,:fill, 60,60, fallback: "no_image.jpg" %>
+          <%= @book.user.name %>
+        <% end %>
+
+           <td><%= @book.title %></td>
+           <td><%= @book.body %></td>
+           <% if @user == current_user %>
+           <td><%= link_to "Edit", edit_book_path(@book)%></td>
+           <td><%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' } %></td>
+         
+       </tbody>
+     </table>
+     </div>
+
+
+  <% end %>
+</div>
+</div>
+
+
